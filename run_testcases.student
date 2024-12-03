@@ -1,0 +1,38 @@
+#! /bin/bash
+
+ls -1 testcases/test??.c | cut -f2 -d'/' | cut -f1 -d'.' | while read line
+do
+  echo "*********** TESTCASE: $line ***********"
+
+  make $line
+  if [[ $? != 0 ]]; then
+    echo "ERROR: make did not complete correctly"
+    echo
+    continue
+  fi
+
+  {
+    ./$line -R
+
+    if [[ -s term0.out ]]; then
+      echo "----- term0.out -----"
+      cat term0.out
+    fi
+    if [[ -s term1.out ]]; then
+      echo "----- term1.out -----"
+      cat term1.out
+    fi
+    if [[ -s term2.out ]]; then
+      echo "----- term2.out -----"
+      cat term2.out
+    fi
+    if [[ -s term3.out ]]; then
+      echo "----- term3.out -----"
+      cat term3.out
+    fi
+
+  } >testcases/$line.student_out 2>&1
+  diff testcases/$line.out testcases/$line.student_out
+  echo
+done
+

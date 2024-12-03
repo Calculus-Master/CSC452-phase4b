@@ -1,0 +1,11 @@
+phase5_start_service_processes() called -- currently a NOP
+start4(): disk scheduling test, create 6 processes that write
+          3 to disk0         
+          3 to disk1         
+ubiq: going to write to unit 0 track 5
+nullsys(): Program called an unimplemented syscall.  syscall no: 14   PSR: 0x09
+finish(): The simulation is now terminating.
+----- term0.out -----
+----- term1.out -----
+----- term2.out -----
+----- term3.out -----

@@ -1,0 +1,16 @@
+phase5_start_service_processes() called -- currently a NOP
+start4(): Start 5 children who all sleep for 10 seconds. Upon
+          waking up, each child checks if its sleep time was at
+          least 10 seconds.
+Child1(): Going to sleep for 10 seconds
+Child2(): Going to sleep for 10 seconds
+Child3(): Going to sleep for 10 seconds
+Child4(): Going to sleep for 10 seconds
+Child5(): Going to sleep for 10 seconds
+Child1(): Sleep done at time 10090117
+Child2(): Sleep done at time 10090136
+Child3(): Sleep done at time 10090155
+Child4(): Sleep done at time 10090176
+Child5(): Sleep done at time 10090192
+start4(): Test sleep done.
+finish(): The simulation is now terminating.
