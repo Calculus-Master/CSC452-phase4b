@@ -27,12 +27,11 @@ uname -v = #1 SMP Debian 5.10.221-1 (2024-07-14)
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
-PATH: /usr/local/sbin
 PATH: /usr/local/bin
-PATH: /usr/sbin
 PATH: /usr/bin
-PATH: /sbin
 PATH: /bin
+PATH: /usr/local/games
+PATH: /usr/games
 
 
 ## ----------- ##
@@ -393,7 +392,7 @@ localstatedir='${prefix}/var'
 mandir='${datarootdir}/man'
 oldincludedir='/usr/include'
 pdfdir='${docdir}'
-prefix='/root'
+prefix='/home/vagrant'
 program_transform_name='s,x,x,'
 psdir='${docdir}'
 sbindir='${exec_prefix}/sbin'
