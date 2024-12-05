@@ -7,5 +7,5 @@ XXterm2(): term2 read   50 bytes (hex):  74 77 6f 3a 20 66 69 72 73 74 20 6c 69 
                  strlen 50 buf  (text): 'two: first line   (third longest line of the set)
 '
 XXterm2(): Terminating
-start4(): XXterm2 completed. kidpid = 10, pid = 10
+start4(): XXterm2 completed. kidpid = 12, pid = 12
 finish(): The simulation is now terminating.

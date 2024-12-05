@@ -20,33 +20,33 @@ Child6(): Sleeping for 12 seconds
 Child7(): Sleeping for 9 seconds
 Child8(): Sleeping for 6 seconds
 Child9(): Sleeping for 3 seconds
-Child0(): After sleeping 30 seconds, difference in system clock is 30049990
-Child1(): After sleeping 27 seconds, difference in system clock is 30049984
-Child2(): After sleeping 24 seconds, difference in system clock is 30049976
-Child3(): After sleeping 21 seconds, difference in system clock is 30049963
-Child4(): After sleeping 18 seconds, difference in system clock is 30049956
-Child5(): After sleeping 15 seconds, difference in system clock is 30049947
-Child6(): After sleeping 12 seconds, difference in system clock is 30049934
-Child7(): After sleeping 9 seconds, difference in system clock is 30049924
-Child8(): After sleeping 6 seconds, difference in system clock is 30049919
-Child9(): After sleeping 3 seconds, difference in system clock is 30049912
-start4(): Wait returned 0, pid:19, status 19
+Child0(): After sleeping 30 seconds, difference in system clock is 30049961
+Child1(): After sleeping 27 seconds, difference in system clock is 30049953
+Child2(): After sleeping 24 seconds, difference in system clock is 30049944
+Child3(): After sleeping 21 seconds, difference in system clock is 30049936
+Child4(): After sleeping 18 seconds, difference in system clock is 30049926
+Child5(): After sleeping 15 seconds, difference in system clock is 30049916
+Child6(): After sleeping 12 seconds, difference in system clock is 30049905
+Child7(): After sleeping 9 seconds, difference in system clock is 30049900
+Child8(): After sleeping 6 seconds, difference in system clock is 30049896
+Child9(): After sleeping 3 seconds, difference in system clock is 30049886
+start4(): Wait returned 0, pid:21, status 19
 start4(): Waiting on Child
-start4(): Wait returned 0, pid:18, status 18
+start4(): Wait returned 0, pid:20, status 18
 start4(): Waiting on Child
-start4(): Wait returned 0, pid:17, status 17
+start4(): Wait returned 0, pid:19, status 17
 start4(): Waiting on Child
-start4(): Wait returned 0, pid:16, status 16
+start4(): Wait returned 0, pid:18, status 16
 start4(): Waiting on Child
-start4(): Wait returned 0, pid:15, status 15
+start4(): Wait returned 0, pid:17, status 15
 start4(): Waiting on Child
-start4(): Wait returned 0, pid:14, status 14
+start4(): Wait returned 0, pid:16, status 14
 start4(): Waiting on Child
-start4(): Wait returned 0, pid:13, status 13
+start4(): Wait returned 0, pid:15, status 13
 start4(): Waiting on Child
-start4(): Wait returned 0, pid:12, status 12
+start4(): Wait returned 0, pid:14, status 12
 start4(): Waiting on Child
-start4(): Wait returned 0, pid:11, status 11
+start4(): Wait returned 0, pid:13, status 11
 start4(): Waiting on Child
-start4(): Wait returned 0, pid:10, status 10
+start4(): Wait returned 0, pid:12, status 10
 finish(): The simulation is now terminating.

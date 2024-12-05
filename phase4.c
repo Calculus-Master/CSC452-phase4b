@@ -36,7 +36,12 @@ typedef struct TerminalData {
     int is_writing; // Flag to indicate if a write is in progress
 } TerminalData;
 
+typedef struct DiskData {
+    USLOSS_DeviceRequest current_request;
+} DiskData;
+
 TerminalData terminal_data[USLOSS_TERM_UNITS];
+DiskData disk_data[USLOSS_DISK_UNITS];
 
 // Helper Functions
 
@@ -197,6 +202,14 @@ int terminal_daemon_process(void* arg)
     return 0; // Should never reach this point
 }
 
+// Device driver for the disk
+int disk_daemon_process(void* arg)
+{
+    int unit = (int)(long)arg;
+    DiskData* disk = &disk_data[unit];
+    return 0;
+}
+
 // Syscall Handlers
 
 // Handles the sleep syscall
@@ -306,6 +319,24 @@ void term_write_handler(USLOSS_Sysargs* args)
     kernSemV(term->write_semaphore_id);
 }
 
+// Handles the DiskSize syscall
+void disk_size_handler(USLOSS_Sysargs* args)
+{
+
+}
+
+// Handles the DiskRead syscall
+void disk_read_handler(USLOSS_Sysargs* args)
+{
+
+}
+
+// Handles the DiskWrite syscall
+void disk_write_handler(USLOSS_Sysargs* args)
+{
+
+}
+
 // Phase 4 Functions
 
 // Sets up data structures and objects for stuff in Phase 4
@@ -319,6 +350,9 @@ void phase4_init()
     systemCallVec[SYS_SLEEP] = sleep_handler;
     systemCallVec[SYS_TERMREAD] = term_read_handler;
     systemCallVec[SYS_TERMWRITE] = term_write_handler;
+    systemCallVec[SYS_DISKSIZE] = disk_size_handler;
+    systemCallVec[SYS_DISKREAD] = disk_read_handler;
+    systemCallVec[SYS_DISKWRITE] = disk_write_handler;
 
     // Setup terminal r/w data structures
     memset(terminal_data, 0, sizeof(TerminalData) * USLOSS_TERM_UNITS);
@@ -347,6 +381,13 @@ void phase4_init()
         // Disable the terminal itself to start
         USLOSS_DeviceOutput(USLOSS_TERM_DEV, i, (void*)(long)0);
     }
+
+    // Setup disk data structures
+    memset(disk_data, 0, sizeof(DiskData) * USLOSS_DISK_UNITS);
+    for(int i = 0; i < 2; i++)
+    {
+        DiskData* disk = &disk_data[i];
+    }
 }
 
 // Sporks the daemons (device drivers) for Phase 4
@@ -358,4 +399,7 @@ void phase4_start_service_processes()
     spork("Terminal 1 Daemon Process", terminal_daemon_process, (void*)1, USLOSS_MIN_STACK, 1);
     spork("Terminal 2 Daemon Process", terminal_daemon_process, (void*)2, USLOSS_MIN_STACK, 1);
     spork("Terminal 3 Daemon Process", terminal_daemon_process, (void*)3, USLOSS_MIN_STACK, 1);
+
+    spork("Disk 0 Daemon Process", disk_daemon_process, (void*)0, USLOSS_MIN_STACK, 1);
+    spork("Disk 1 Daemon Process", disk_daemon_process, (void*)1, USLOSS_MIN_STACK, 1);
 }

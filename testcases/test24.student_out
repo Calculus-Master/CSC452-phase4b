@@ -1,6 +1,19 @@
 phase5_start_service_processes() called -- currently a NOP
 start4(): started
-nullsys(): Program called an unimplemented syscall.  syscall no: 15   PSR: 0x09
+start4(): unit 1, sector size 1, track size -1110237816, disk size 4
+
+start4(): writing to disk 1, track 0, sector 0
+start4(): DiskWrite returned status = -1110237816
+
+start4(): writing to disk 1, track 1, sector 0
+start4(): DiskWrite returned status = -1110237816
+
+start4(): writing to disk 1, track 2, sector 0
+start4(): DiskWrite returned status = -1110237816
+
+start4(): writing to disk 1, track 3, sector 0
+start4(): DiskWrite returned status = -1110237816
+start4(): calling Terminate
 finish(): The simulation is now terminating.
 ----- term0.out -----
 ----- term1.out -----

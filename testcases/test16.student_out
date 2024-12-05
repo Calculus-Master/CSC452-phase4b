@@ -3,7 +3,30 @@ start4(): disk scheduling test, 8 children
           algorithm test           
           different tracks
 going to write track 5
-nullsys(): Program called an unimplemented syscall.  syscall no: 14   PSR: 0x09
+ERROR: DiskWrite()   retval 4   status -486148112
+going to write track 3
+ERROR: DiskWrite()   retval 4   status -486147088
+going to write track 9
+ERROR: DiskWrite()   retval 4   status -486148112
+going to write track 0
+ERROR: DiskWrite()   retval 4   status -486148624
+going to write track 7
+ERROR: DiskWrite()   retval 4   status -486147088
+going to write track 2
+ERROR: DiskWrite()   retval 4   status -486147600
+going to write track 1
+ERROR: DiskWrite()   retval 4   status -486148112
+going to write track 6
+ERROR: DiskWrite()   retval 4   status -486147600
+process 19 quit with status 9
+process 18 quit with status 8
+process 17 quit with status 7
+process 16 quit with status 6
+process 15 quit with status 5
+process 14 quit with status 4
+process 13 quit with status 3
+process 12 quit with status 2
+start4(): done 0
 finish(): The simulation is now terminating.
 ----- term0.out -----
 ----- term1.out -----
