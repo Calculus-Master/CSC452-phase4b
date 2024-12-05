@@ -3,7 +3,7 @@ start4(): Writing data to 3 disk sectors, wrapping to next track
 
 start4(): Disk 0:
 test13: testcases/test13.c:40: start4: Assertion `result == 0' failed.
-./run_testcases.student: line 37: 30352 Aborted                 ./$line -R
+./run_testcases.student: line 37: 38476 Aborted                 ./$line -R
 ----- term0.out -----
 ----- term1.out -----
 ----- term2.out -----

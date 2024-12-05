@@ -9,15 +9,15 @@ start4(): Spawning 2 children to termfuncs
 ChildTR(): start
 start4(): Spawning 4 children to diskfuncs
 ChildDW0(): writing to disk 0, track 5, sector 0
-ChildDW0(): DiskWrite0 returned status = -1060994008
+ChildDW0(): DiskWrite0 returned status = -68070360
 ChildDW1(): writing to disk 1, track 5, sector 0
-ChildDW1(): DiskWrite1 returned status = -1060912072
+ChildDW1(): DiskWrite1 returned status = -67988424
 ChildR0(): reading from disk 0, track 5, sector 0
-ChildR0(): DiskRead returned status = -1060830136
-ChildR0(): disk_buf_B contains: 'MN¾ªª'
+ChildR0(): DiskRead returned status = -67906488
+ChildR0(): disk_buf_B contains: 'MýÔªª'
 ChildR1(): reading from disk 1, track 5, sector 0
-ChildR1(): DiskRead returned status = -1060748200
-ChildR1(): disk_buf_B contains: 'MN¾ªª'
+ChildR1(): DiskRead returned status = -67824552
+ChildR1(): disk_buf_B contains: 'MýÔªª'
 ChildTR(): terminal 0, read_length = 61
 ChildTR(): read from term0: read 'zero: first line   (second longest first line in the inputs)
 'ChildTR(): terminal 1, read_length = 40

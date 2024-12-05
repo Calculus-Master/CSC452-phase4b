@@ -1,13 +1,13 @@
 phase5_start_service_processes() called -- currently a NOP
 start4(): started
-start4(): unit 0, sector size 0, track size -1924102592, disk size 0
-start4(): unit 1, sector size 1, track size 0, disk size -1
+start4(): unit 0, sector size 512, track size 16, disk size 16
+start4(): unit 1, sector size 512, track size 16, disk size 32
 
 start4(): writing to disk 0, track 5, sector 0
-start4(): DiskWrite returned status = -1925833328
+start4(): DiskWrite returned status = -1671295600
 
 start4(): reading from disk 0, track 5, sector 0
-start4(): DiskRead returned status = -1925833840
+start4(): DiskRead returned status = -1671296112
 
 start4(): disk_buf_B contains:
 

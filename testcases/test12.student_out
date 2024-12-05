@@ -3,7 +3,7 @@ start4(): Writing data to 3 disk sectors, then reading them back
           Confirm that data read back matches data read in
 start4(): Testing Disk 0
 test12: testcases/test12.c:42: start4: Assertion `result == 0' failed.
-./run_testcases.student: line 37: 30274 Aborted                 ./$line -R
+./run_testcases.student: line 37: 38398 Aborted                 ./$line -R
 ----- term0.out -----
 ----- term1.out -----
 ----- term2.out -----

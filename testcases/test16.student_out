@@ -3,21 +3,21 @@ start4(): disk scheduling test, 8 children
           algorithm test           
           different tracks
 going to write track 5
-ERROR: DiskWrite()   retval 4   status -486148112
+ERROR: DiskWrite()   retval 4   status -1288898576
 going to write track 3
-ERROR: DiskWrite()   retval 4   status -486147088
+ERROR: DiskWrite()   retval 4   status -1288897552
 going to write track 9
-ERROR: DiskWrite()   retval 4   status -486148112
+ERROR: DiskWrite()   retval 4   status -1288898576
 going to write track 0
-ERROR: DiskWrite()   retval 4   status -486148624
+ERROR: DiskWrite()   retval 4   status -1288899088
 going to write track 7
-ERROR: DiskWrite()   retval 4   status -486147088
+ERROR: DiskWrite()   retval 4   status -1288897552
 going to write track 2
-ERROR: DiskWrite()   retval 4   status -486147600
+ERROR: DiskWrite()   retval 4   status -1288898064
 going to write track 1
-ERROR: DiskWrite()   retval 4   status -486148112
+ERROR: DiskWrite()   retval 4   status -1288898576
 going to write track 6
-ERROR: DiskWrite()   retval 4   status -486147600
+ERROR: DiskWrite()   retval 4   status -1288898064
 process 19 quit with status 9
 process 18 quit with status 8
 process 17 quit with status 7

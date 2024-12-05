@@ -37,6 +37,8 @@ typedef struct TerminalData {
 } TerminalData;
 
 typedef struct DiskData {
+    int access_mutex; // Semaphore controlling mutex access to disk operations
+    int track_count; // Number of tracks on the disk
     USLOSS_DeviceRequest current_request;
 } DiskData;
 
@@ -207,6 +209,36 @@ int disk_daemon_process(void* arg)
 {
     int unit = (int)(long)arg;
     DiskData* disk = &disk_data[unit];
+
+    // Query track count initially
+    // Until this operation completes, the access mutex is not released so no other disk operations can
+    // occur until the track count is known
+
+    int track_count;
+    disk->current_request.opr = USLOSS_DISK_TRACKS;
+    disk->current_request.reg1 = &track_count;
+    disk->current_request.reg2 = 0;
+
+    USLOSS_DeviceOutput(USLOSS_DISK_DEV, unit, &disk->current_request);
+
+    // Wait for the query to end
+    int status;
+    waitDevice(USLOSS_DISK_DEV, unit, &status);
+
+    // Update the received values and clear the request
+    disk->track_count = track_count;
+    memset(&disk->current_request, 0, sizeof(USLOSS_DeviceRequest));
+
+    // Release the access mutex so syscalls can start to complete
+    kernSemV(disk->access_mutex);
+
+    // Standard infinite loop to handle disk ops
+    while(1)
+    {
+        // Wait for a disk operation to fire
+        waitDevice(USLOSS_DISK_DEV, unit, &status);
+    }
+
     return 0;
 }
 
@@ -322,7 +354,29 @@ void term_write_handler(USLOSS_Sysargs* args)
 // Handles the DiskSize syscall
 void disk_size_handler(USLOSS_Sysargs* args)
 {
+    int unit = (int)(long)args->arg1;
 
+    if(unit < 0 || unit >= USLOSS_DISK_UNITS) // Invalid disk unit
+    {
+        args->arg4 = (void*)-1;
+        return;
+    }
+
+    DiskData* disk = &disk_data[unit];
+
+    // Acquire access mutex
+    // If this runs before the daemon finishes the tracks query, it'll just block here
+    kernSemP(disk->access_mutex);
+
+    int tracks = disk->track_count;
+
+    args->arg1 = (void*)(long)USLOSS_DISK_SECTOR_SIZE; // Sector size
+    args->arg2 = (void*)(long)USLOSS_DISK_TRACK_SIZE; // Number of sectors in a track
+    args->arg3 = (void*)(long)tracks; // Number of tracks in the disk
+    args->arg4 = (void*)(long)0; // Success
+
+    // Release access mutex
+    kernSemV(disk->access_mutex);
 }
 
 // Handles the DiskRead syscall
@@ -387,6 +441,9 @@ void phase4_init()
     for(int i = 0; i < 2; i++)
     {
         DiskData* disk = &disk_data[i];
+
+        // Create disk access mutex semaphore
+        kernSemCreate(0, &disk->access_mutex);
     }
 }
 

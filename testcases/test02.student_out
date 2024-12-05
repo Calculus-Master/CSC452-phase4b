@@ -20,16 +20,16 @@ Child6(): Sleeping for 12 seconds
 Child7(): Sleeping for 9 seconds
 Child8(): Sleeping for 6 seconds
 Child9(): Sleeping for 3 seconds
-Child0(): After sleeping 30 seconds, difference in system clock is 30049961
-Child1(): After sleeping 27 seconds, difference in system clock is 30049953
-Child2(): After sleeping 24 seconds, difference in system clock is 30049944
-Child3(): After sleeping 21 seconds, difference in system clock is 30049936
-Child4(): After sleeping 18 seconds, difference in system clock is 30049926
-Child5(): After sleeping 15 seconds, difference in system clock is 30049916
-Child6(): After sleeping 12 seconds, difference in system clock is 30049905
-Child7(): After sleeping 9 seconds, difference in system clock is 30049900
-Child8(): After sleeping 6 seconds, difference in system clock is 30049896
-Child9(): After sleeping 3 seconds, difference in system clock is 30049886
+Child0(): After sleeping 30 seconds, difference in system clock is 30029965
+Child1(): After sleeping 27 seconds, difference in system clock is 30029956
+Child2(): After sleeping 24 seconds, difference in system clock is 30029946
+Child3(): After sleeping 21 seconds, difference in system clock is 30029940
+Child4(): After sleeping 18 seconds, difference in system clock is 30029930
+Child5(): After sleeping 15 seconds, difference in system clock is 30029916
+Child6(): After sleeping 12 seconds, difference in system clock is 30029910
+Child7(): After sleeping 9 seconds, difference in system clock is 30029901
+Child8(): After sleeping 6 seconds, difference in system clock is 30029897
+Child9(): After sleeping 3 seconds, difference in system clock is 30029888
 start4(): Wait returned 0, pid:21, status 19
 start4(): Waiting on Child
 start4(): Wait returned 0, pid:20, status 18
