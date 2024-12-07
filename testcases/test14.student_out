@@ -3,39 +3,11 @@ start4(): disk scheduling test, create 4 processes that write
           various places on the disk.  After the 4 processes are
           done, start4 reads the 4 locations & prints the
           results.  Uses disk 1.
-disk_put returned error   0
-disk_put returned error   3
-disk_put returned error   0
-disk_put returned error   5
-disk_put returned error   0
-disk_put returned error   5
-disk_put returned error   0
-disk_put returned error   5
-disk_put returned error   4
-disk_put returned error   1
-disk_put returned error   6
-disk_put returned error   1
-disk_put returned error   6
-disk_put returned error   1
-disk_put returned error   9
-disk_put returned error   9
-disk_put returned error   2
-disk_put returned error   7
-disk_put returned error   2
-disk_put returned error   7
-disk_put returned error   2
-disk_put returned error   2
-disk_put returned error   9
-disk_put returned error   3
-disk_put returned error   8
-disk_put returned error   3
-disk_put returned error   8
-disk_put returned error   3
-start4(): disk_get returned errorstart4(): read: xxx
-start4(): disk_get returned errorstart4(): read: xxx
-start4(): disk_get returned errorstart4(): read: xxx
-start4(): disk_get returned errorstart4(): read: xxx
-start4(): done. checkSum = 0
+start4(): read: One flew East
+start4(): read: One flew West
+start4(): read: One flew over the coo-coo's nest
+start4(): read: --did it work?
+start4(): done. checkSum = 111
 finish(): The simulation is now terminating.
 ----- term0.out -----
 ----- term1.out -----

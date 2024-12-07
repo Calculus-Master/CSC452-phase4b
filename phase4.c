@@ -154,7 +154,10 @@ int perform_disk_rw(int unit, DiskOpRequest* request)
         {
             block = 0;
             track++;
-            perform_disk_seek(unit, track);
+
+            status = perform_disk_seek(unit, track);
+            if(status != USLOSS_DEV_OK)
+                return status;
         }
     }
 
@@ -172,12 +175,12 @@ void cscan_disk(int unit, DiskData* disk)
 
         DiskOpRequest* target_prev = NULL;
         DiskOpRequest* target;
-        int diff = disk->track_count + 10;
+        int diff = 100000;
 
         while(current != NULL)
         {
             int track_diff = current->start_track - disk->current_track;
-            if(track_diff > 0 && track_diff < diff) // New next best track
+            if(track_diff >= 0 && track_diff < diff) // New next best track
             {
                 target_prev = prev;
                 target = current;
@@ -191,21 +194,17 @@ void cscan_disk(int unit, DiskData* disk)
         // If target is still null -> seek to track 0
         if(target == NULL)
         {
-            printf("Daemon %d: No target found, seeking to track 0\n", unit);
             perform_disk_seek(unit, 0);
             continue; // Restart the loop
         }
         else // Perform the selected disk operation
         {
-            printf("Daemon: %d: Target not null, starting operation\n", unit);
-            printf("Daemon %d: Seeking to track %d\n", unit, target->start_track);
             // SEEK
-            perform_disk_seek(unit, target->start_track);
+            int status = perform_disk_seek(unit, target->start_track);
 
-            printf("Daemon %d: Performing disk operation\n", unit);
-            // READ/WRITE
-            int status = perform_disk_rw(unit, target);
-            printf("Daemon %d: Operation done, status: %d\n", unit, status);
+            // READ/WRITE (only if the seek succeeded)
+            if(status == USLOSS_DEV_OK)
+                status = perform_disk_rw(unit, target);
 
             // Remove operation from request queue
             if(target_prev == NULL)
@@ -213,10 +212,7 @@ void cscan_disk(int unit, DiskData* disk)
             else
                 target_prev->next = target->next;
 
-            printf("Daemon %d: Operation removed, new head = %p\n", unit, disk->user_request_queue);
-
             // Wake up the process
-            printf("Sending status %d to mbox %d\n", status, target->mbox_id);
             MboxSend(target->mbox_id, &status, sizeof(int));
         }
     }
@@ -373,26 +369,20 @@ int disk_daemon_process(void* arg)
     // Standard infinite loop to handle disk ops
     while(1)
     {
-        printf("Daemon %d: About to grab queue mutex\n", unit);
         kernSemP(disk->queue_mutex);
-        printf("Daemon %d: Grabbed queue mutex\n", unit);
 
         if(disk->user_request_queue != NULL) // Pending disk ops to handle
         {
-            printf("Daemon %d: Handling disk ops\n", unit);
             // CSCAN processing until the queue is empty
             cscan_disk(unit, disk);
-            printf("Daemon %d: CSCAN done\n", unit);
 
             kernSemV(disk->queue_mutex);
         }
         else // No pending disk ops, so block until one arrives
         {
-            printf("Daemon %d: No disk ops, blocking (idle)\n", unit);
             kernSemV(disk->queue_mutex);
 
             MboxRecv(disk->idle_mbox, NULL, 0);
-            printf("Daemon %d: Woke up from idle\n", unit);
         }
     }
 
@@ -544,8 +534,8 @@ void disk_rw_common(USLOSS_Sysargs* args, int is_write)
     int start_block = (int)(long)args->arg4;
     int unit = (int)(long)args->arg5;
 
-    // Invalid arguments
-    if(buffer == NULL || num_blocks <= 0 || start_track < 0 || start_block < 0 || unit < 0 || unit >= USLOSS_DISK_UNITS)
+    // Invalid arguments (unit)
+    if(unit < 0 || unit >= USLOSS_DISK_UNITS)
     {
         args->arg4 = (void*)-1;
         return;
@@ -553,8 +543,14 @@ void disk_rw_common(USLOSS_Sysargs* args, int is_write)
 
     DiskData* disk = &disk_data[unit];
 
-    // Grab access mutex
-    // kernSemP(disk->access_mutex);
+    // Invalid arguments (everything else)
+    if(buffer == NULL || num_blocks <= 0 ||
+        start_track < 0 ||
+        start_block < 0 || start_block >= USLOSS_DISK_TRACK_SIZE)
+    {
+        args->arg4 = (void*)-1;
+        return;
+    }
 
     // Create a disk operation request
     DiskOpRequest* request = &disk_user_requests[getpid() % MAXPROC];
@@ -586,21 +582,16 @@ void disk_rw_common(USLOSS_Sysargs* args, int is_write)
     MboxCondSend(disk->idle_mbox, NULL, 0);
 
     // Wait for the daemon to finish handling the request
-    printf("caller blocking on mbox %d\n", request->mbox_id);
     int status;
     MboxRecv(request->mbox_id, &status, sizeof(int));
-    printf("caller unblocked from mbox %d\n", request->mbox_id);
 
-    printf("CALLER RELEASING MBOX %d\n", request->mbox_id);
+    // Delete the mailbox since it's no longer needed
     MboxRelease(request->mbox_id);
 
     // Clear the request and assign proper output, delete the mailbox
     memset(request, 0, sizeof(DiskOpRequest));
     args->arg1 = (void*)(long)status; // Either 0 or device status register
     args->arg4 = (void*)0;
-
-    // Release access mutex
-    // kernSemV(disk->access_mutex);
 }
 
 // Handles the DiskRead syscall

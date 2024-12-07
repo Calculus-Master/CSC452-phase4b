@@ -1,9 +1,5 @@
 phase5_start_service_processes() called -- currently a NOP
 start4(): Attempting some invalid writes.  If they are all rejected (as expected), then you will not see anything more before 'done'
-start4(): Disk : An invalid call was made, but DiskWrite() returned something other than -1   (unit 3 is invalid)
-start4(): Disk : An invalid call was made, but DiskWrite() returned something other than -1   (startSector is invalid)
-start4(): Disk : An invalid call was made, but DiskWrite() returned something other than 0   (track seems plausible, but is too high)
-start4(): Disk : An invalid call was made, but DiskWrite() the status was something other than USLOSS_DEV_ERR   (track seems plausible, but is too high)
 start4(): done
 finish(): The simulation is now terminating.
 ----- term0.out -----

@@ -9,26 +9,26 @@ start4(): Spawning 2 children to termfuncs
 ChildTR(): start
 start4(): Spawning 4 children to diskfuncs
 ChildDW0(): writing to disk 0, track 5, sector 0
-ChildDW0(): DiskWrite0 returned status = -68070360
 ChildDW1(): writing to disk 1, track 5, sector 0
-ChildDW1(): DiskWrite1 returned status = -67988424
 ChildR0(): reading from disk 0, track 5, sector 0
-ChildR0(): DiskRead returned status = -67906488
-ChildR0(): disk_buf_B contains: 'MýÔªª'
 ChildR1(): reading from disk 1, track 5, sector 0
-ChildR1(): DiskRead returned status = -67824552
-ChildR1(): disk_buf_B contains: 'MýÔªª'
+ChildDW0(): DiskWrite0 returned status = 0
+ChildDW1(): DiskWrite1 returned status = 0
+ChildR0(): DiskRead returned status = 0
+ChildR0(): disk_buf_B contains: 'ChildDW0(): A wonderful message to put on the disk...'
+ChildR1(): DiskRead returned status = 0
+ChildR1(): disk_buf_B contains: 'ChildDW1(): A wonderful message to put on the disk...'
 ChildTR(): terminal 0, read_length = 61
 ChildTR(): read from term0: read 'zero: first line   (second longest first line in the inputs)
 'ChildTR(): terminal 1, read_length = 40
 ChildTR(): read from term1: read 'one: first line   (shortest first line)
 'ChildTR(): terminal 2, read_length = 50
 ChildTR(): read from term2: read 'two: first line   (third longest line of the set)
-'ChildS(0): After sleeping 5 seconds, diff in sys_clock is 5109959
-ChildS(1): After sleeping 4 seconds, diff in sys_clock is 5109928
-ChildS(2): After sleeping 3 seconds, diff in sys_clock is 5109894
-ChildS(3): After sleeping 2 seconds, diff in sys_clock is 5109862
-ChildS(4): After sleeping 1 seconds, diff in sys_clock is 5109827
+'ChildS(0): After sleeping 5 seconds, diff in sys_clock is 5089953
+ChildS(1): After sleeping 4 seconds, diff in sys_clock is 5089921
+ChildS(2): After sleeping 3 seconds, diff in sys_clock is 5089888
+ChildS(3): After sleeping 2 seconds, diff in sys_clock is 5089856
+ChildS(4): After sleeping 1 seconds, diff in sys_clock is 5089825
 ChildTR(): terminal 3, read_length = 73
 ChildTR(): read from term3: read 'three: first line   (definitely the longest first line of all the files)
 'ChildTR(): done
